@@ -85,7 +85,7 @@ def H(x_obs, y_obs,z_obs, p, param):
 
 #Resolvemos por medio de leapfrog el sistema de ecuaciones de hamilton. Usamos kick - drift- kick.
 #Además, hago varias veces un paso para no avanzar en pasos tan cortos.
-def leapfrog(x_obs, y_obs,z_obs, p , param, delta=1E-5, iteraciones=2):
+def leapfrog(x_obs, y_obs,z_obs, p , param, delta=1E-1, iteraciones=2):
     paramNew =param.copy()
     pNew=p
    
@@ -118,7 +118,6 @@ def MCMC(pasos):
         alpha=np.random.random()
         r = min(1, np.exp(-(H(x_obs, y_obs,z_obs,prop_p ,prop_param)-H(x_obs, y_obs,z_obs, p[i-1,:], param[i-1,:]))))
 				
-        print(alpha<r)
         if(alpha<r):
             param[i,:]=prop_param
             p[i,:]=prop_p
@@ -127,6 +126,16 @@ def MCMC(pasos):
             p[i,:]=p[i-1,:]
             
     return param 
-print(MCMC(100))  
+
+parametros=MCMC(100)
+
+plt.hist(paramtros[0], label="Sigma")
+
+plt.hist(paramtros[1], label="Rho")
+
+plt.hist(paramtros[2], label="Beta")
+
+plt.label()
+plt.savefig("parametros.png")
 
 
