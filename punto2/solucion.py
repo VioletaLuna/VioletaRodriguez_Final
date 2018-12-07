@@ -130,10 +130,13 @@ def MCMC(pasos):
 parametros=MCMC(100)
 
 plt.hist(paramtros[0], label="Sigma")
+np.mean(paramtros[0])
 
 plt.hist(paramtros[1], label="Rho")
+np.mean(paramtros[2])
 
 plt.hist(paramtros[2], label="Beta")
+np.mean(paramtros[2])
 
 plt.label()
 plt.savefig("parametros.png")
